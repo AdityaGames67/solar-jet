@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Solar Jet — 3D Space Flight & Solar System Simulation</title>
   
   <!-- Fallback Fonts & Google Fonts -->
@@ -1520,15 +1520,328 @@
       font-family: 'Space Grotesk', sans-serif;
     }
 
-    /* Responsive */
+    /* =========================================================
+       MOBILE & RESPONSIVE DESIGN ENGINE (TABLETS & SMARTPHONES)
+       ========================================================= */
+    #mobile-flight-controls {
+      display: none;
+      position: absolute;
+      bottom: 14px;
+      left: 12px;
+      right: 12px;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .mobile-left-cluster {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    #touch-joystick-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      touch-action: none;
+    }
+
+    #touch-joystick-base {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(7, 16, 38, 0.65);
+      border: 2px solid rgba(0, 240, 255, 0.4);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.2), inset 0 0 15px rgba(0, 240, 255, 0.15);
+      position: relative;
+      touch-action: none;
+    }
+
+    #touch-joystick-knob {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #00f0ff, #0284c7);
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 12px #00f0ff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .touch-joystick-label {
+      font-family: 'Orbitron', monospace;
+      font-size: 8px;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      text-shadow: 0 0 6px var(--accent-cyan);
+    }
+
+    .mobile-throttle-column {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      touch-action: none;
+    }
+
+    .mobile-t-btn {
+      width: 44px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(7, 16, 38, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: #00f0ff;
+      font-family: 'Orbitron', monospace;
+      font-size: 9px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+    .mobile-t-btn:active, .mobile-t-btn.active {
+      background: rgba(0, 240, 255, 0.35);
+      border-color: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      transform: scale(0.95);
+    }
+    .mobile-t-btn.btn-boost {
+      border-color: #ffb703;
+      color: #ffb703;
+    }
+    .mobile-t-btn.btn-boost:active, .mobile-t-btn.btn-boost.active {
+      background: rgba(255, 183, 3, 0.35);
+      box-shadow: 0 0 12px #ffb703;
+    }
+
+    .mobile-right-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: auto;
+      touch-action: none;
+    }
+
+    .mobile-action-row {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .mobile-act-btn {
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 10px;
+      font-family: 'Orbitron', monospace;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      transition: transform 0.1s ease;
+    }
+    .mobile-act-btn:active {
+      transform: scale(0.92);
+    }
+
+    .btn-act-cannon {
+      background: rgba(0, 240, 255, 0.2);
+      border: 1.5px solid #00f0ff;
+      color: #00f0ff;
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+    }
+    .btn-act-missile {
+      background: rgba(255, 0, 85, 0.2);
+      border: 1.5px solid #ff0055;
+      color: #ff0055;
+      box-shadow: 0 0 12px rgba(255, 0, 85, 0.25);
+    }
+    .btn-act-cobra {
+      background: rgba(0, 255, 136, 0.18);
+      border: 1.5px solid #00ff88;
+      color: #00ff88;
+      padding: 0 10px;
+      height: 34px;
+      font-size: 9px;
+    }
+    .btn-act-view {
+      background: rgba(168, 85, 247, 0.18);
+      border: 1.5px solid #c084fc;
+      color: #c084fc;
+      padding: 0 10px;
+      height: 34px;
+      font-size: 9px;
+    }
+    .btn-act-exit {
+      background: rgba(239, 68, 68, 0.2);
+      border: 1.5px solid #ef4444;
+      color: #ef4444;
+      padding: 0 10px;
+      height: 34px;
+      font-size: 9px;
+    }
+
+    /* Floating Pilot Quick-Launch Button on Mobile in Orbital Mode */
+    .mobile-float-pilot-btn {
+      display: none;
+      position: absolute;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(2, 132, 199, 0.5));
+      border: 1.5px solid #00f0ff;
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4), inset 0 0 12px rgba(0, 240, 255, 0.2);
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-family: 'Orbitron', monospace;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      align-items: center;
+      gap: 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .mobile-float-pilot-btn:active {
+      transform: translateX(-50%) scale(0.95);
+    }
+
+    /* Screen Queries */
     @media (max-width: 900px) {
       .nav-teleport { display: none; }
       .floating-stats { display: none; }
-      .orbit-strip { max-width: 48vw; }
-      .planet-dossier { width: calc(100vw - 32px); right: 16px; top: 80px; bottom: 90px; }
-      .btn-reset-orbit { top: auto; bottom: 85px; right: 24px; }
-      #tour-hud { width: calc(100vw - 32px); bottom: 85px; }
-      .hud-tape-left, .hud-tape-right { display: none; }
+      .pilot-help-box { display: none !important; }
+      .pilot-desktop-actions { display: none !important; }
+      .pilot-flight-instruments { display: none !important; }
+
+      #mobile-flight-controls {
+        display: flex !important;
+      }
+
+      .mobile-float-pilot-btn {
+        display: inline-flex !important;
+      }
+
+      /* Make bottom hud horizontally scrollable on mobile */
+      .bottom-hud {
+        width: 100vw !important;
+        left: 0 !important;
+        transform: none !important;
+        padding: 6px 10px !important;
+        bottom: 0 !important;
+        border-radius: 16px 16px 0 0 !important;
+        background: rgba(3, 6, 18, 0.92) !important;
+        backdrop-filter: blur(12px) !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+      }
+      .bottom-hud::-webkit-scrollbar { display: none; }
+
+      .orbit-strip {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        justify-content: flex-start !important;
+        padding: 2px 8px !important;
+        gap: 8px !important;
+      }
+      .orbit-strip::-webkit-scrollbar { display: none; }
+
+      .orbit-chip {
+        flex-shrink: 0 !important;
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+      }
+
+      .planet-dossier {
+        width: calc(100vw - 20px) !important;
+        right: 10px !important;
+        top: auto !important;
+        bottom: 74px !important;
+        max-height: 60vh !important;
+        border-radius: 18px !important;
+        overflow-y: auto !important;
+      }
+
+      .btn-reset-orbit {
+        top: 68px !important;
+        right: 12px !important;
+        font-size: 10px !important;
+        padding: 6px 12px !important;
+      }
+
+      #tour-hud {
+        width: calc(100vw - 24px) !important;
+        left: 12px !important;
+        transform: none !important;
+        bottom: 72px !important;
+        padding: 12px 16px !important;
+      }
+
+      .hud-tape-left, .hud-tape-right {
+        display: none !important;
+      }
+
+      .hud-alien-threat-panel {
+        top: 10px !important;
+        transform: scale(0.85) !important;
+      }
+
+      .hud-compass-container {
+        top: 50px !important;
+        transform: translateX(-50%) scale(0.85) !important;
+      }
+
+      .modal-card {
+        width: 95vw !important;
+        max-height: 88vh !important;
+        padding: 18px 16px !important;
+      }
+
+      header {
+        padding: 8px 12px !important;
+      }
+      .brand-text h1 {
+        font-size: 13px !important;
+      }
+      .brand-text p {
+        font-size: 9px !important;
+      }
+    }
+
+    @media (max-width: 500px) {
+      #touch-joystick-base {
+        width: 86px;
+        height: 86px;
+      }
+      #touch-joystick-knob {
+        width: 36px;
+        height: 36px;
+      }
+      .mobile-act-btn {
+        height: 38px;
+        padding: 0 10px;
+        font-size: 9px;
+      }
     }
   </style>
 
@@ -1690,7 +2003,12 @@
   <!-- Reset Orbit Floating Button -->
   <button class="btn-reset-orbit" id="btn-reset-orbit" onclick="focusOnBody('overview')" title="Reset View to Orbit Overview">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-    Full Galaxy View
+    Overview
+  </button>
+
+  <!-- Mobile Floating Quick-Launch Pilot Button -->
+  <button id="mobile-float-pilot-btn" class="mobile-float-pilot-btn" onclick="togglePilotMode()" title="Launch Su-35 Flight Simulator">
+    <span>✈️</span> PILOT SU-35
   </button>
 
   <!-- Sliding Planetary Inspector Dossier -->
@@ -1879,12 +2197,44 @@
       <div style="margin-top:6px; color:#ff0055; font-weight:700;">👾 DESTROY ALL ALIEN RAIDERS!</div>
     </div>
 
-    <!-- Top Right Action Cluster -->
-    <div style="position:absolute; top:24px; right:24px; display:flex; gap:10px; align-items:center;">
+    <!-- Top Right Action Cluster (Desktop) -->
+    <div class="pilot-desktop-actions" style="position:absolute; top:24px; right:24px; display:flex; gap:10px; align-items:center;">
       <button class="btn-missile-action" style="border-color:#00f0ff; background:rgba(0,240,255,0.18);" onclick="toggleCockpitView()">📷 View (<kbd>V</kbd>)</button>
       <button class="btn-missile-action" onclick="fireR73Missile()">🚀 R-73 Missile (<kbd>X</kbd>)</button>
       <button class="btn-cobra-action" onclick="triggerPugachevCobra()">🐍 Cobra (<kbd>C</kbd>)</button>
       <button class="btn-exit-pilot" style="position:static;" onclick="togglePilotMode()">✕ Exit Su-35</button>
+    </div>
+
+    <!-- On-Screen Virtual Touch Flight & Combat Controls for Mobile -->
+    <div id="mobile-flight-controls">
+      <!-- Left: Dynamic Virtual Touch Flight Joystick & Throttle -->
+      <div class="mobile-left-cluster">
+        <div id="touch-joystick-zone">
+          <div id="touch-joystick-base">
+            <div id="touch-joystick-knob"></div>
+          </div>
+          <div class="touch-joystick-label">STEER &bull; PITCH</div>
+        </div>
+
+        <div class="mobile-throttle-column">
+          <button class="mobile-t-btn" id="m-btn-thr-up">▲ THR</button>
+          <button class="mobile-t-btn" id="m-btn-thr-dn">▼ BRK</button>
+          <button class="mobile-t-btn btn-boost" id="m-btn-boost">⚡ BST</button>
+        </div>
+      </div>
+
+      <!-- Right: Touch Weapon & Maneuver Combat Cluster -->
+      <div class="mobile-right-cluster">
+        <div class="mobile-action-row">
+          <button class="mobile-act-btn btn-act-cannon" id="m-btn-cannon">💥 30MM</button>
+          <button class="mobile-act-btn btn-act-missile" id="m-btn-missile">🚀 R-73</button>
+        </div>
+        <div class="mobile-action-row">
+          <button class="mobile-act-btn btn-act-cobra" id="m-btn-cobra">🐍 COBRA</button>
+          <button class="mobile-act-btn btn-act-view" id="m-btn-view">📷 VIEW</button>
+          <button class="mobile-act-btn btn-act-exit" id="m-btn-exit">✕ EXIT</button>
+        </div>
+      </div>
     </div>
 
     <!-- Bottom Flight Instruments -->
@@ -2627,7 +2977,7 @@
       createSu35FighterJet();
       createSpaceDustSystem();
       spawnAlienFleet(6);
-      setupInteractiveRaycaster();
+      setupInteractiveRaycaster(); initMobileTouchControls();
 
       // 7. Populate Bottom HUD Selector Chips & Saved Wishes
       renderOrbitChips();
@@ -5185,6 +5535,174 @@
     /* =====================================================================
        RAYCASTER & INTERACTION
        ===================================================================== */
+        /* =========================================================
+       MOBILE VIRTUAL TOUCH FLIGHT JOYSTICK & TOUCH HANDLERS
+       ========================================================= */
+    function initMobileTouchControls() {
+      const joystickZone = document.getElementById('touch-joystick-zone');
+      const joystickBase = document.getElementById('touch-joystick-base');
+      const joystickKnob = document.getElementById('touch-joystick-knob');
+      if (!joystickZone || !joystickBase || !joystickKnob) return;
+
+      let touchId = null;
+      let centerX = 0;
+      let centerY = 0;
+      const maxRadius = 38;
+
+      const resetJoystick = () => {
+        touchId = null;
+        joystickKnob.style.transform = 'translate(-50%, -50%)';
+        keysPressed['a'] = false;
+        keysPressed['d'] = false;
+        keysPressed['r'] = false;
+        keysPressed['f'] = false;
+      };
+
+      joystickBase.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const touch = e.changedTouches[0];
+        touchId = touch.identifier;
+        const rect = joystickBase.getBoundingClientRect();
+        centerX = rect.left + rect.width / 2;
+        centerY = rect.top + rect.height / 2;
+      }, { passive: false });
+
+      window.addEventListener('touchmove', (e) => {
+        if (touchId === null) return;
+        for (let i = 0; i < e.changedTouches.length; i++) {
+          const touch = e.changedTouches[i];
+          if (touch.identifier === touchId) {
+            e.preventDefault();
+            let dx = touch.clientX - centerX;
+            let dy = touch.clientY - centerY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist > maxRadius) {
+              dx = (dx / dist) * maxRadius;
+              dy = (dy / dist) * maxRadius;
+            }
+
+            joystickKnob.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px))`;
+
+            // Steering Left / Right (A / D)
+            if (dx < -10) {
+              keysPressed['a'] = true;
+              keysPressed['d'] = false;
+            } else if (dx > 10) {
+              keysPressed['d'] = true;
+              keysPressed['a'] = false;
+            } else {
+              keysPressed['a'] = false;
+              keysPressed['d'] = false;
+            }
+
+            // Pitch Nose Up / Down (R / F)
+            if (dy < -10) {
+              keysPressed['r'] = true;
+              keysPressed['f'] = false;
+            } else if (dy > 10) {
+              keysPressed['f'] = true;
+              keysPressed['r'] = false;
+            } else {
+              keysPressed['r'] = false;
+              keysPressed['f'] = false;
+            }
+            break;
+          }
+        }
+      }, { passive: false });
+
+      window.addEventListener('touchend', (e) => {
+        if (touchId === null) return;
+        for (let i = 0; i < e.changedTouches.length; i++) {
+          if (e.changedTouches[i].identifier === touchId) {
+            resetJoystick();
+            break;
+          }
+        }
+      });
+      window.addEventListener('touchcancel', (e) => {
+        if (touchId !== null) resetJoystick();
+      });
+
+      // Throttle Buttons
+      const bindHoldKey = (btnId, keyName) => {
+        const btn = document.getElementById(btnId);
+        if (!btn) return;
+        btn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          btn.classList.add('active');
+          if (keyName === 'Shift') jetBoost = true;
+          else keysPressed[keyName] = true;
+        }, { passive: false });
+
+        const endTouch = (e) => {
+          btn.classList.remove('active');
+          if (keyName === 'Shift') jetBoost = false;
+          else keysPressed[keyName] = false;
+        };
+        btn.addEventListener('touchend', endTouch);
+        btn.addEventListener('touchcancel', endTouch);
+      };
+
+      bindHoldKey('m-btn-thr-up', 'w');
+      bindHoldKey('m-btn-thr-dn', 's');
+      bindHoldKey('m-btn-boost', 'Shift');
+
+      // Combat Action Buttons
+      const cannonBtn = document.getElementById('m-btn-cannon');
+      if (cannonBtn) {
+        let cannonInterval = null;
+        cannonBtn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          fire30mmCannon();
+          if (!cannonInterval) {
+            cannonInterval = setInterval(fire30mmCannon, 90);
+          }
+        }, { passive: false });
+        const stopCannon = () => {
+          if (cannonInterval) {
+            clearInterval(cannonInterval);
+            cannonInterval = null;
+          }
+        };
+        cannonBtn.addEventListener('touchend', stopCannon);
+        cannonBtn.addEventListener('touchcancel', stopCannon);
+      }
+
+      const missileBtn = document.getElementById('m-btn-missile');
+      if (missileBtn) {
+        missileBtn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          fireR73Missile();
+        }, { passive: false });
+      }
+
+      const cobraBtn = document.getElementById('m-btn-cobra');
+      if (cobraBtn) {
+        cobraBtn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          triggerPugachevCobra();
+        }, { passive: false });
+      }
+
+      const viewBtn = document.getElementById('m-btn-view');
+      if (viewBtn) {
+        viewBtn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          toggleCockpitView();
+        }, { passive: false });
+      }
+
+      const exitBtn = document.getElementById('m-btn-exit');
+      if (exitBtn) {
+        exitBtn.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          togglePilotMode();
+        }, { passive: false });
+      }
+    }
+
     function setupInteractiveRaycaster() {
       raycaster = new THREE.Raycaster();
       mouse = new THREE.Vector2(-1000, -1000);
@@ -5211,6 +5729,27 @@
           if (hitId) {
             playSfx('select');
             focusOnBody(hitId);
+          }
+        }
+      });
+
+      // Mobile Touch Tap on Planets
+      window.addEventListener('touchend', (e) => {
+        if (pilotMode) return;
+        if (e.target.closest('header, aside, footer, .modal-backdrop, .btn-reset-orbit, #tour-hud, #mobile-float-pilot-btn, #mobile-flight-controls')) return;
+        if (e.changedTouches && e.changedTouches.length === 1) {
+          const touch = e.changedTouches[0];
+          mouse.x = (touch.clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+          raycaster.setFromCamera(mouse, camera);
+          const interactiveMeshes = Object.values(celestialObjects).map(o => o.mesh);
+          const intersects = raycaster.intersectObjects(interactiveMeshes, false);
+          if (intersects.length > 0) {
+            const hitId = intersects[0].object.userData.id;
+            if (hitId) {
+              playSfx('select');
+              focusOnBody(hitId);
+            }
           }
         }
       });
